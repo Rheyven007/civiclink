@@ -12,24 +12,24 @@ $resolved_month = $conn->query("SELECT COUNT(*) c FROM service_requests WHERE st
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="grid grid-4">
-  <div class="stat"><div class="num"><?= $pending_proposals ?></div><div class="lbl">Pending Proposals</div></div>
-  <div class="stat"><div class="num"><?= $pending_requests ?></div><div class="lbl">Open Service Requests</div></div>
-  <div class="stat"><div class="num"><?= $pending_complaints ?></div><div class="lbl">Active Complaints</div></div>
-  <div class="stat"><div class="num"><?= $resolved_month ?></div><div class="lbl">Resolved (30 days)</div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-lightbulb"></i></div><div><div class="num"><?= $pending_proposals ?></div><div class="lbl">Pending Proposals</div></div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-clipboard-list"></i></div><div><div class="num"><?= $pending_requests ?></div><div class="lbl">Open Service Requests</div></div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="num"><?= $pending_complaints ?></div><div class="lbl">Active Complaints</div></div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div><div><div class="num"><?= $resolved_month ?></div><div class="lbl">Resolved (30 days)</div></div></div>
 </div>
 <div class="grid grid-3 mt">
   <div class="card">
-    <h2>Community Proposals</h2>
+    <h2><i class="fa-solid fa-lightbulb"></i> Community Proposals</h2>
     <p class="small muted mb">Review and decide on citizen-submitted projects.</p>
     <a href="/lgu/cases.php?type=proposal" class="btn btn-block">Manage Proposals</a>
   </div>
   <div class="card">
-    <h2>Service Requests</h2>
+    <h2><i class="fa-solid fa-clipboard-list"></i> Service Requests</h2>
     <p class="small muted mb">Track and update non-emergency requests.</p>
     <a href="/lgu/cases.php?type=service_request" class="btn btn-block">Manage Requests</a>
   </div>
   <div class="card">
-    <h2>Complaints & Disputes</h2>
+    <h2><i class="fa-solid fa-triangle-exclamation"></i> Complaints & Disputes</h2>
     <p class="small muted mb">Investigate and resolve citizen complaints.</p>
     <a href="/lgu/cases.php?type=complaint" class="btn btn-block">Manage Complaints</a>
   </div>

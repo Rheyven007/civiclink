@@ -83,9 +83,37 @@ function status_badge($status) {
         'mediation' => 'badge-warn', 'dismissed' => 'badge-bad', 'active' => 'badge-ok',
         'suspended' => 'badge-bad', 'open' => 'badge-ok'
     ];
+    $icon_map = [
+        'pending' => 'fa-hourglass-half', 'under_review' => 'fa-magnifying-glass', 'approved' => 'fa-circle-check',
+        'rejected' => 'fa-circle-xmark', 'implemented' => 'fa-flag-checkered', 'submitted' => 'fa-paper-plane',
+        'in_progress' => 'fa-spinner', 'resolved' => 'fa-circle-check', 'closed' => 'fa-box-archive',
+        'cancelled' => 'fa-ban', 'filed' => 'fa-file-circle-exclamation', 'investigating' => 'fa-magnifying-glass',
+        'mediation' => 'fa-handshake', 'dismissed' => 'fa-circle-xmark', 'active' => 'fa-circle-check',
+        'suspended' => 'fa-ban', 'open' => 'fa-lock-open'
+    ];
     $cls = $map[$status] ?? 'badge-muted';
+    $icon = $icon_map[$status] ?? 'fa-circle';
     $label = ucwords(str_replace('_', ' ', $status));
-    return "<span class=\"badge $cls\">$label</span>";
+    return "<span class=\"badge $cls\"><i class=\"fa-solid $icon\"></i>$label</span>";
+}
+
+function notify_vote_update($conn, $proposal_id) {
+    // Notify the proposal owner whenever the vote tally changes.
+    $stmt = $conn->prepare("SELECT p.user_id, p.title, p.votes_up, p.votes_down FROM proposals p WHERE p.proposal_id=?");
+    $stmt->bind_param('i', $proposal_id);
+    $stmt->execute();
+    $p = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    if (!$p) return;
+    $msg = "Vote update on your proposal \"{$p['title']}\": {$p['votes_up']} support / {$p['votes_down']} oppose.";
+    notify_user($conn, $p['user_id'], $msg, "/citizen/proposal_view.php?id=$proposal_id");
+}
+
+function notify_decision_logged($conn, $type, $ref_id, $owner_id, $title, $new_status, $link = null) {
+    $type_label = ucwords(str_replace('_', ' ', $type));
+    $status_label = ucwords(str_replace('_', ' ', $new_status));
+    $msg = "Decision log updated: your $type_label \"$title\" is now $status_label.";
+    notify_user($conn, $owner_id, $msg, $link);
 }
 
 function time_ago($datetime) {

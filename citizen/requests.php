@@ -13,14 +13,14 @@ $requests = $stmt->get_result();
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="flex-between mb">
-  <p class="muted">Track your non-emergency public service requests.</p>
-  <a href="/citizen/request_new.php" class="btn">+ New Request</a>
+  <p class="muted"><i class="fa-solid fa-clipboard-list"></i> Track your non-emergency public service requests.</p>
+  <a href="/citizen/request_new.php" class="btn"><i class="fa-solid fa-plus"></i> New Request</a>
 </div>
 <div class="card">
 <table>
 <tr><th>Service Type</th><th>Department</th><th>Priority</th><th>Status</th><th>Submitted</th></tr>
 <?php if ($requests->num_rows === 0): ?>
-  <tr><td colspan="5" class="empty">No service requests yet.</td></tr>
+  <tr><td colspan="5" class="empty"><i class="fa-regular fa-folder-open"></i>No service requests yet.</td></tr>
 <?php else: while ($r = $requests->fetch_assoc()): ?>
   <tr>
     <td><?= e($r['service_type']) ?></td>

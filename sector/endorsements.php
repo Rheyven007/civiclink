@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['proposal_id'])) {
     $stmt->bind_param('ii', $pid, $uid);
     $stmt->execute();
     $conn->query("UPDATE proposals SET votes_up = (SELECT COUNT(*) FROM proposal_votes WHERE proposal_id=$pid AND vote_type='up') WHERE proposal_id=$pid");
+    notify_vote_update($conn, $pid);
     log_audit($conn, $uid, 'Sector Endorsement', "Endorsed proposal #$pid");
     header('Location: /sector/endorsements.php');
     exit;
@@ -30,18 +31,18 @@ require_once __DIR__ . '/../includes/header.php';
 <?php else: while ($p = $proposals->fetch_assoc()): ?>
   <div class="card">
     <div class="flex-between">
-      <div class="pill"><?= e(ucfirst($p['category'])) ?></div>
+      <div class="pill"><i class="fa-solid fa-tag"></i> <?= e(ucfirst($p['category'])) ?></div>
       <?= status_badge($p['status']) ?>
     </div>
     <h2 style="margin-top:8px"><?= e($p['title']) ?></h2>
     <p class="small muted mb"><?= e(mb_strimwidth($p['description'],0,140,'...')) ?></p>
-    <div class="small muted mb">By <?= e($p['full_name']) ?> &middot; 👍 <?= $p['votes_up'] ?></div>
+    <div class="small muted mb"><i class="fa-solid fa-user"></i> By <?= e($p['full_name']) ?> &middot; <span class="badge badge-ok"><i class="fa-solid fa-thumbs-up"></i> <?= $p['votes_up'] ?></span></div>
     <form method="post">
       <input type="hidden" name="proposal_id" value="<?= $p['proposal_id'] ?>">
       <?php if ($p['my_vote'] === 'up'): ?>
-        <button class="btn btn-sm btn-muted" disabled>✓ Endorsed</button>
+        <button class="btn btn-sm btn-muted" disabled><i class="fa-solid fa-check"></i> Endorsed</button>
       <?php else: ?>
-        <button type="submit" class="btn btn-sm">Endorse Proposal</button>
+        <button type="submit" class="btn btn-sm"><i class="fa-solid fa-thumbs-up"></i> Endorse Proposal</button>
       <?php endif; ?>
     </form>
   </div>

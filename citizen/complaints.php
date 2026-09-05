@@ -13,14 +13,14 @@ $complaints = $stmt->get_result();
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="flex-between mb">
-  <p class="muted">File and track complaints or disputes with evidence.</p>
-  <a href="/citizen/complaint_new.php" class="btn">+ File Complaint</a>
+  <p class="muted"><i class="fa-solid fa-triangle-exclamation"></i> File and track complaints or disputes with evidence.</p>
+  <a href="/citizen/complaint_new.php" class="btn"><i class="fa-solid fa-plus"></i> File Complaint</a>
 </div>
 <div class="card">
 <table>
 <tr><th>Subject</th><th>Category</th><th>Status</th><th>Filed</th></tr>
 <?php if ($complaints->num_rows === 0): ?>
-  <tr><td colspan="4" class="empty">No complaints filed yet.</td></tr>
+  <tr><td colspan="4" class="empty"><i class="fa-regular fa-folder-open"></i>No complaints filed yet.</td></tr>
 <?php else: while ($c = $complaints->fetch_assoc()): ?>
   <tr>
     <td><?= e($c['subject']) ?></td>

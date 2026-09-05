@@ -37,15 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('siiss', $type, $ref_id, $uid, $decision, $justification);
         $stmt->execute();
 
-        // notify the submitter
+        // notify the submitter that a decision has been logged for transparency
         $owner_col = 'user_id';
         $stmt = $conn->prepare("SELECT $owner_col uid, $title_col t FROM $table WHERE $id_col=?");
         $stmt->bind_param('i', $ref_id);
         $stmt->execute();
         $row = $stmt->get_result()->fetch_assoc();
         if ($row) {
-            $msg = "Your " . str_replace('_',' ',$type) . " \"{$row['t']}\" status changed to " . ucwords(str_replace('_',' ',$new_status));
-            notify_user($conn, $row['uid'], $msg);
+            $link = $type === 'proposal' ? "/citizen/proposal_view.php?id=$ref_id" : null;
+            notify_decision_logged($conn, $type, $ref_id, $row['uid'], $row['t'], $new_status, $link);
         }
         log_audit($conn, $uid, 'Decision Recorded', "$type #$ref_id -> $new_status");
         header("Location: /lgu/cases.php?type=$type&updated=1");
@@ -62,14 +62,14 @@ $cases = $conn->query($sql);
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="tabs">
-  <a href="?type=proposal" class="<?= $type==='proposal'?'active':'' ?>">Proposals</a>
-  <a href="?type=service_request" class="<?= $type==='service_request'?'active':'' ?>">Service Requests</a>
-  <a href="?type=complaint" class="<?= $type==='complaint'?'active':'' ?>">Complaints</a>
+  <a href="?type=proposal" class="<?= $type==='proposal'?'active':'' ?>"><i class="fa-solid fa-lightbulb"></i> Proposals</a>
+  <a href="?type=service_request" class="<?= $type==='service_request'?'active':'' ?>"><i class="fa-solid fa-clipboard-list"></i> Service Requests</a>
+  <a href="?type=complaint" class="<?= $type==='complaint'?'active':'' ?>"><i class="fa-solid fa-triangle-exclamation"></i> Complaints</a>
 </div>
-<?php if (isset($_GET['updated'])): ?><div class="alert alert-ok">Decision recorded and logged for transparency.</div><?php endif; ?>
+<?php if (isset($_GET['updated'])): ?><div class="alert alert-ok"><i class="fa-solid fa-circle-check"></i> Decision recorded and logged for transparency. The citizen has been notified.</div><?php endif; ?>
 
 <div class="card">
-  <h2><?= $labels[$type] ?></h2>
+  <h2><i class="fa-solid fa-folder-open"></i> <?= $labels[$type] ?></h2>
   <table>
     <tr><th>Title</th><th>Submitted By</th><th>Status</th><th>Date</th><th>Action</th></tr>
     <?php if ($cases->num_rows === 0): ?>
@@ -80,7 +80,7 @@ require_once __DIR__ . '/../includes/header.php';
         <td><?= e($c['full_name']) ?></td>
         <td><?= status_badge($c['status']) ?></td>
         <td class="small muted"><?= time_ago($c['created_at']) ?></td>
-        <td><a href="#case-<?= $c[$id_col] ?>" class="small">Decide ↓</a></td>
+        <td><a href="#case-<?= $c[$id_col] ?>" class="small"><i class="fa-solid fa-gavel"></i> Decide</a></td>
       </tr>
     <?php endwhile; endif; ?>
   </table>
@@ -115,10 +115,10 @@ while ($c = $cases->fetch_assoc()):
       </div>
     </div>
     <div class="field">
-      <label>Justification (required for transparency log) *</label>
+      <label><i class="fa-solid fa-scroll"></i> Justification (required for transparency log) *</label>
       <textarea name="justification" required placeholder="Explain the reasoning for this decision..."></textarea>
     </div>
-    <button type="submit" class="btn btn-sm">Record Decision</button>
+    <button type="submit" class="btn btn-sm"><i class="fa-solid fa-gavel"></i> Record Decision</button>
   </form>
 </div>
 <?php endwhile; ?>

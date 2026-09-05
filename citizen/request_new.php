@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="card" style="max-width:600px">
-  <h2>Request a Public Service</h2>
+  <h2><i class="fa-solid fa-clipboard-list"></i> Request a Public Service</h2>
   <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
   <form method="post">
     <div class="field">
@@ -58,8 +58,8 @@ require_once __DIR__ . '/../includes/header.php';
       <label>Description *</label>
       <textarea name="description" required placeholder="Describe your request..."><?= e($_POST['description'] ?? '') ?></textarea>
     </div>
-    <button type="submit" class="btn">Submit Request</button>
-    <a href="/citizen/requests.php" class="btn btn-muted">Cancel</a>
+    <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+    <a href="/citizen/requests.php" class="btn btn-muted"><i class="fa-solid fa-xmark"></i> Cancel</a>
   </form>
 </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

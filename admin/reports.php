@@ -19,26 +19,26 @@ require_once __DIR__ . '/../includes/header.php';
 </div>
 <div class="grid grid-3">
   <div class="card">
-    <h2>Proposals by Status</h2>
+    <h2><i class="fa-solid fa-lightbulb"></i> Proposals by Status</h2>
     <?php while ($r = $proposal_status->fetch_assoc()): ?>
       <div class="flex-between small" style="padding:4px 0"><span><?= status_badge($r['status']) ?></span><strong><?= $r['c'] ?></strong></div>
     <?php endwhile; ?>
   </div>
   <div class="card">
-    <h2>Requests by Status</h2>
+    <h2><i class="fa-solid fa-clipboard-list"></i> Requests by Status</h2>
     <?php while ($r = $request_status->fetch_assoc()): ?>
       <div class="flex-between small" style="padding:4px 0"><span><?= status_badge($r['status']) ?></span><strong><?= $r['c'] ?></strong></div>
     <?php endwhile; ?>
   </div>
   <div class="card">
-    <h2>Complaints by Status</h2>
+    <h2><i class="fa-solid fa-triangle-exclamation"></i> Complaints by Status</h2>
     <?php while ($r = $complaint_status->fetch_assoc()): ?>
       <div class="flex-between small" style="padding:4px 0"><span><?= status_badge($r['status']) ?></span><strong><?= $r['c'] ?></strong></div>
     <?php endwhile; ?>
   </div>
 </div>
 <div class="card">
-  <h2>Sector Distribution (Equity Tracking)</h2>
+  <h2><i class="fa-solid fa-diagram-project"></i> Sector Distribution (Equity Tracking)</h2>
   <table>
     <tr><th>Sector</th><th>Registered Members</th></tr>
     <?php $sector_dist->data_seek(0); while ($s = $sector_dist->fetch_assoc()): ?>
@@ -47,10 +47,10 @@ require_once __DIR__ . '/../includes/header.php';
   </table>
 </div>
 <div class="card">
-  <h2>Proposal Submissions (Last 6 Months)</h2>
+  <h2><i class="fa-solid fa-chart-line"></i> Proposal Submissions (Last 6 Months)</h2>
   <table>
     <tr><th>Month</th><th>Submissions</th></tr>
-    <?php if ($monthly->num_rows === 0): ?><tr><td colspan="2" class="empty">No data yet.</td></tr><?php endif; ?>
+    <?php if ($monthly->num_rows === 0): ?><tr><td colspan="2" class="empty"><i class="fa-regular fa-chart-bar"></i>No data yet.</td></tr><?php endif; ?>
     <?php while ($m = $monthly->fetch_assoc()): ?>
       <tr><td><?= date('F Y', strtotime($m['ym'].'-01')) ?></td><td><?= $m['c'] ?></td></tr>
     <?php endwhile; ?>

@@ -23,7 +23,7 @@ require_once __DIR__ . '/../includes/header.php';
   <div class="stat"><div class="num"><?= $total ?></div><div class="lbl">Total Requests</div></div>
 </div>
 <div class="card">
-  <h2>Performance by Department</h2>
+  <h2><i class="fa-solid fa-chart-line"></i> Performance by Department</h2>
   <table>
     <tr><th>Department</th><th>Total</th><th>Resolved</th><th>Rate</th></tr>
     <?php while ($d = $by_dept->fetch_assoc()):

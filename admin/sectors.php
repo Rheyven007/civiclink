@@ -33,15 +33,15 @@ require_once __DIR__ . '/../includes/header.php';
 <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
 <div class="grid grid-2">
   <div class="card">
-    <h2>Add New Sector</h2>
+    <h2><i class="fa-solid fa-plus"></i> Add New Sector</h2>
     <form method="post">
       <div class="field"><label>Sector Name</label><input type="text" name="sector_name" required></div>
       <div class="field"><label>Description</label><input type="text" name="description"></div>
-      <button type="submit" name="add_sector" value="1" class="btn btn-sm">Add Sector</button>
+      <button type="submit" name="add_sector" value="1" class="btn btn-sm"><i class="fa-solid fa-plus"></i> Add Sector</button>
     </form>
   </div>
   <div class="card">
-    <h2>Existing Sectors</h2>
+    <h2><i class="fa-solid fa-diagram-project"></i> Existing Sectors</h2>
     <table>
       <tr><th>Sector</th><th>Members</th><th></th></tr>
       <?php while ($s = $sectors->fetch_assoc()): ?>
@@ -51,7 +51,7 @@ require_once __DIR__ . '/../includes/header.php';
           <td>
             <form method="post" onsubmit="return confirm('Delete this sector?')">
               <input type="hidden" name="delete_id" value="<?= $s['sector_id'] ?>">
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
             </form>
           </td>
         </tr>

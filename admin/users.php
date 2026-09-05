@@ -57,7 +57,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="grid grid-2">
   <div class="card">
-    <h2>Create LGU Officer Account</h2>
+    <h2><i class="fa-solid fa-user-plus"></i> Create LGU Officer Account</h2>
     <form method="post">
       <input type="hidden" name="action" value="create_officer">
       <input type="hidden" name="target_id" value="0">
@@ -65,21 +65,21 @@ require_once __DIR__ . '/../includes/header.php';
       <div class="field"><label>Email</label><input type="email" name="email" required></div>
       <div class="field"><label>Department</label><input type="text" name="department" placeholder="e.g., Public Works"></div>
       <div class="field"><label>Temporary Password</label><input type="password" name="password" required></div>
-      <button type="submit" class="btn btn-sm">Create Account</button>
+      <button type="submit" class="btn btn-sm"><i class="fa-solid fa-user-plus"></i> Create Account</button>
     </form>
   </div>
   <div class="card">
-    <h2>Search Users</h2>
+    <h2><i class="fa-solid fa-magnifying-glass"></i> Search Users</h2>
     <form method="get">
       <div class="field"><label>Name or Email</label><input type="text" name="q" value="<?= e($search) ?>" placeholder="Search..."></div>
-      <button type="submit" class="btn btn-sm btn-outline">Search</button>
-      <a href="/admin/users.php" class="btn btn-sm btn-muted">Clear</a>
+      <button type="submit" class="btn btn-sm btn-outline"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+      <a href="/admin/users.php" class="btn btn-sm btn-muted"><i class="fa-solid fa-xmark"></i> Clear</a>
     </form>
   </div>
 </div>
 
 <div class="card">
-  <h2>All Users (<?= $users->num_rows ?>)</h2>
+  <h2><i class="fa-solid fa-users"></i> All Users (<?= $users->num_rows ?>)</h2>
   <table>
     <tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Joined</th><th>Actions</th></tr>
     <?php while ($u = $users->fetch_assoc()): ?>
@@ -106,7 +106,7 @@ require_once __DIR__ . '/../includes/header.php';
             <input type="hidden" name="target_id" value="<?= $u['user_id'] ?>">
             <input type="hidden" name="status" value="<?= $u['status'] ?>">
             <button type="submit" class="btn btn-sm <?= $u['status']==='active'?'btn-danger':'btn-ok' ?>">
-              <?= $u['status']==='active' ? 'Suspend' : 'Activate' ?>
+              <i class="fa-solid <?= $u['status']==='active' ? 'fa-ban' : 'fa-circle-check' ?>"></i> <?= $u['status']==='active' ? 'Suspend' : 'Activate' ?>
             </button>
           </form>
           <?php else: ?>

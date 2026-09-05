@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="card" style="max-width:560px">
-  <h2>Profile Information</h2>
+  <h2><i class="fa-solid fa-user"></i> Profile Information</h2>
   <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
   <?php if ($success): ?><div class="alert alert-ok"><?= e($success) ?></div><?php endif; ?>
   <form method="post">
@@ -88,7 +88,7 @@ require_once __DIR__ . '/../includes/header.php';
       <label>New Password (leave blank to keep current)</label>
       <input type="password" name="new_password">
     </div>
-    <button type="submit" class="btn">Save Changes</button>
+    <button type="submit" class="btn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
   </form>
 </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

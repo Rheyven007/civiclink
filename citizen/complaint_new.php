@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="card" style="max-width:600px">
-  <h2>File a Complaint or Dispute</h2>
+  <h2><i class="fa-solid fa-triangle-exclamation"></i> File a Complaint or Dispute</h2>
   <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
   <form method="post" enctype="multipart/form-data">
     <div class="field">
@@ -68,8 +68,8 @@ require_once __DIR__ . '/../includes/header.php';
       <input type="file" name="evidence" accept=".jpg,.jpeg,.png,.pdf">
       <div class="hint">JPG, PNG, or PDF — max 5MB</div>
     </div>
-    <button type="submit" class="btn">Submit Complaint</button>
-    <a href="/citizen/complaints.php" class="btn btn-muted">Cancel</a>
+    <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit Complaint</button>
+    <a href="/citizen/complaints.php" class="btn btn-muted"><i class="fa-solid fa-xmark"></i> Cancel</a>
   </form>
 </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

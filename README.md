@@ -1,4 +1,4 @@
-# CivicBridge
+# CivicLink
 **Inclusive Urban Governance and Participation System**
 
 A centralized web-based platform connecting citizens, LGUs, and community organizations for participatory governance — aligned with SDG 9, 10, 11, and 16.

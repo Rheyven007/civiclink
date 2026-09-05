@@ -52,15 +52,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register - CivicBridge</title>
+<title>Register - CivicLink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="auth-wrap">
-  <div class="auth-box" style="max-width:460px">
+  <div style="width:100%;max-width:460px">
+    <a href="/landing.php" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
+    <div class="auth-box" style="max-width:460px">
+    <div class="logo"><i class="fa-solid fa-landmark-dome"></i> Civic<span>Link</span></div>
     <h1>Create your account</h1>
-    <p class="sub">Join CivicBridge to participate in local governance</p>
-    <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
+    <p class="sub">Join CivicLink to participate in local governance</p>
+    <?php if ($error): ?><div class="alert alert-bad"><i class="fa-solid fa-circle-exclamation"></i> <?= e($error) ?></div><?php endif; ?>
     <form method="post">
       <div class="field">
         <label>Full name *</label>
@@ -99,9 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <div class="hint">Used only for equitable prioritization and policy analysis — never for discrimination.</div>
       </div>
-      <button type="submit" class="btn btn-block">Create Account</button>
+      <button type="submit" class="btn btn-block"><i class="fa-solid fa-user-plus"></i> Create Account</button>
     </form>
     <div class="switch">Already have an account? <a href="/auth/login.php">Log in</a></div>
+    </div>
   </div>
 </div>
 </body>

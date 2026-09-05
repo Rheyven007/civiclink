@@ -28,10 +28,10 @@ $mine = $stmt->get_result();
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
-<?php if (isset($_GET['sent'])): ?><div class="alert alert-ok">Thank you! Your feedback has been recorded.</div><?php endif; ?>
+<?php if (isset($_GET['sent'])): ?><div class="alert alert-ok"><i class="fa-solid fa-circle-check"></i> Thank you! Your feedback has been recorded.</div><?php endif; ?>
 <div class="grid grid-2">
   <div class="card">
-    <h2>Rate LGU Services</h2>
+    <h2><i class="fa-solid fa-star"></i> Rate LGU Services</h2>
     <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
     <form method="post">
       <div class="field">
@@ -57,13 +57,13 @@ require_once __DIR__ . '/../includes/header.php';
         <label>Comments</label>
         <textarea name="comments" placeholder="Tell us more..."></textarea>
       </div>
-      <button type="submit" class="btn">Submit Feedback</button>
+      <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
     </form>
   </div>
   <div class="card">
-    <h2>Your Recent Feedback</h2>
+    <h2><i class="fa-solid fa-comment-dots"></i> Your Recent Feedback</h2>
     <?php if ($mine->num_rows === 0): ?>
-      <div class="empty">You haven't submitted feedback yet.</div>
+      <div class="empty"><i class="fa-regular fa-star"></i>You haven't submitted feedback yet.</div>
     <?php else: while ($f = $mine->fetch_assoc()): ?>
       <div style="padding:9px 0;border-bottom:1px solid var(--line)">
         <div class="flex-between">

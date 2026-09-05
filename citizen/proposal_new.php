@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="card" style="max-width:640px">
-  <h2>Propose a Community Project</h2>
+  <h2><i class="fa-solid fa-lightbulb"></i> Propose a Community Project</h2>
   <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
   <form method="post">
     <div class="field">
@@ -56,8 +56,8 @@ require_once __DIR__ . '/../includes/header.php';
       <label>Expected Benefits</label>
       <textarea name="expected_benefits" placeholder="Who benefits and how?"><?= e($_POST['expected_benefits'] ?? '') ?></textarea>
     </div>
-    <button type="submit" class="btn">Submit Proposal</button>
-    <a href="/citizen/proposals.php" class="btn btn-muted">Cancel</a>
+    <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit Proposal</button>
+    <a href="/citizen/proposals.php" class="btn btn-muted"><i class="fa-solid fa-xmark"></i> Cancel</a>
   </form>
 </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

@@ -26,10 +26,10 @@ $consultations = $conn->query("SELECT c.*, u.full_name creator,
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
-<p class="muted mb">Participate in public discussions and voting for community planning.</p>
+<p class="muted mb"><i class="fa-solid fa-people-arrows"></i> Participate in public discussions and voting for community planning.</p>
 <div class="grid grid-2">
 <?php if ($consultations->num_rows === 0): ?>
-  <div class="empty">No consultations available right now.</div>
+  <div class="empty"><i class="fa-regular fa-comments"></i>No consultations available right now.</div>
 <?php else: while ($c = $consultations->fetch_assoc()):
     $total = max(1, $c['total_responses']);
     $support_pct = round(($c['support_c']/$total)*100);
@@ -41,7 +41,7 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
     <h2 style="margin-top:8px"><?= e($c['title']) ?></h2>
     <p class="small muted mb"><?= nl2br(e($c['description'])) ?></p>
-    <div class="small mb">Support: <?= $support_pct ?>% (<?= $c['total_responses'] ?> responses)</div>
+    <div class="small mb"><span class="badge badge-ok"><i class="fa-solid fa-chart-simple"></i> <?= $support_pct ?>% support</span> &middot; <?= $c['total_responses'] ?> responses</div>
     <div class="bar mb"><div class="bar-fill" style="width:<?= $support_pct ?>%"></div></div>
     <?php if ($c['status'] === 'open'): ?>
     <form method="post">
@@ -57,10 +57,10 @@ require_once __DIR__ . '/../includes/header.php';
       <div class="field">
         <textarea name="response_text" placeholder="Optional comment..."></textarea>
       </div>
-      <button type="submit" class="btn btn-sm"><?= $c['my_choice'] ? 'Update Response' : 'Submit Response' ?></button>
+      <button type="submit" class="btn btn-sm"><i class="fa-solid fa-square-poll-vertical"></i> <?= $c['my_choice'] ? 'Update Response' : 'Submit Response' ?></button>
     </form>
     <?php else: ?>
-      <div class="small muted">This consultation is closed.</div>
+      <div class="small muted"><i class="fa-solid fa-lock"></i> This consultation is closed.</div>
     <?php endif; ?>
   </div>
 <?php endwhile; endif; ?>

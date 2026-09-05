@@ -20,7 +20,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="card mb">
   <form method="get" style="display:flex;gap:10px;align-items:end">
     <div class="field" style="max-width:280px;margin-bottom:0">
-      <label>Filter by Sector</label>
+      <label><i class="fa-solid fa-filter"></i> Filter by Sector</label>
       <select name="sector_id" onchange="this.form.submit()">
         <option value="0">All Sectors</option>
         <?php while ($s = $sectors->fetch_assoc()): ?>
@@ -31,11 +31,11 @@ require_once __DIR__ . '/../includes/header.php';
   </form>
 </div>
 <div class="card">
-  <h2>Reported Issues (Complaints)</h2>
+  <h2><i class="fa-solid fa-triangle-exclamation"></i> Reported Issues (Complaints)</h2>
   <table>
     <tr><th>Subject</th><th>Filed By</th><th>Sector</th><th>Status</th><th>Date</th></tr>
     <?php if ($issues->num_rows === 0): ?>
-      <tr><td colspan="5" class="empty">No issues found for this filter.</td></tr>
+      <tr><td colspan="5" class="empty"><i class="fa-regular fa-folder-open"></i>No issues found for this filter.</td></tr>
     <?php else: while ($i = $issues->fetch_assoc()): ?>
       <tr>
         <td><?= e($i['title']) ?></td>

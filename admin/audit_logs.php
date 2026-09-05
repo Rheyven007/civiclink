@@ -14,11 +14,11 @@ $logs = $conn->query("SELECT a.*, u.full_name, u.role FROM audit_logs a LEFT JOI
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="card">
-  <h2>System Audit Logs (<?= $total ?> total)</h2>
+  <h2><i class="fa-solid fa-file-shield"></i> System Audit Logs (<?= $total ?> total)</h2>
   <table>
     <tr><th>User</th><th>Role</th><th>Action</th><th>Details</th><th>IP</th><th>Timestamp</th></tr>
     <?php if ($logs->num_rows === 0): ?>
-      <tr><td colspan="6" class="empty">No logs found.</td></tr>
+      <tr><td colspan="6" class="empty"><i class="fa-regular fa-folder-open"></i>No logs found.</td></tr>
     <?php else: while ($l = $logs->fetch_assoc()): ?>
       <tr>
         <td><?= e($l['full_name'] ?? 'System') ?></td>
@@ -31,9 +31,9 @@ require_once __DIR__ . '/../includes/header.php';
     <?php endwhile; endif; ?>
   </table>
   <div class="flex-between mt">
-    <?php if ($page > 1): ?><a href="?p=<?= $page-1 ?>" class="btn btn-sm btn-outline">← Previous</a><?php else: ?><span></span><?php endif; ?>
+    <?php if ($page > 1): ?><a href="?p=<?= $page-1 ?>" class="btn btn-sm btn-outline"><i class="fa-solid fa-arrow-left"></i> Previous</a><?php else: ?><span></span><?php endif; ?>
     <span class="small muted">Page <?= $page ?> of <?= max(1, ceil($total/$per_page)) ?></span>
-    <?php if ($offset + $per_page < $total): ?><a href="?p=<?= $page+1 ?>" class="btn btn-sm btn-outline">Next →</a><?php else: ?><span></span><?php endif; ?>
+    <?php if ($offset + $per_page < $total): ?><a href="?p=<?= $page+1 ?>" class="btn btn-sm btn-outline">Next <i class="fa-solid fa-arrow-right"></i></a><?php else: ?><span></span><?php endif; ?>
   </div>
 </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

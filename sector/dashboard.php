@@ -14,12 +14,12 @@ $open_proposals = $conn->query("SELECT COUNT(*) c FROM proposals WHERE status IN
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="grid grid-3 mb">
-  <div class="stat"><div class="num"><?= $open_issues ?></div><div class="lbl">Open Complaints (All)</div></div>
-  <div class="stat"><div class="num"><?= $open_proposals ?></div><div class="lbl">Pending Proposals</div></div>
-  <div class="stat"><div class="num"><?= $sectors_stats->num_rows ?></div><div class="lbl">Registered Sectors</div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="num"><?= $open_issues ?></div><div class="lbl">Open Complaints (All)</div></div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-lightbulb"></i></div><div><div class="num"><?= $open_proposals ?></div><div class="lbl">Pending Proposals</div></div></div>
+  <div class="stat"><div class="stat-icon"><i class="fa-solid fa-diagram-project"></i></div><div><div class="num"><?= $sectors_stats->num_rows ?></div><div class="lbl">Registered Sectors</div></div></div>
 </div>
 <div class="card">
-  <h2>Sector Membership Overview</h2>
+  <h2><i class="fa-solid fa-users"></i> Sector Membership Overview</h2>
   <table>
     <tr><th>Sector</th><th>Members</th></tr>
     <?php $sectors_stats->data_seek(0); while ($s = $sectors_stats->fetch_assoc()): ?>
@@ -28,11 +28,11 @@ require_once __DIR__ . '/../includes/header.php';
   </table>
 </div>
 <div class="card">
-  <h2>Quick Links</h2>
+  <h2><i class="fa-solid fa-bolt"></i> Quick Links</h2>
   <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <a href="/sector/issues.php" class="btn">View Sector Issues</a>
-    <a href="/sector/endorsements.php" class="btn btn-outline">Endorse a Proposal</a>
-    <a href="/citizen/consultations.php" class="btn btn-outline">Public Consultations</a>
+    <a href="/sector/issues.php" class="btn"><i class="fa-solid fa-triangle-exclamation"></i> View Sector Issues</a>
+    <a href="/sector/endorsements.php" class="btn btn-outline"><i class="fa-solid fa-thumbs-up"></i> Endorse a Proposal</a>
+    <a href="/citizen/consultations.php" class="btn btn-outline"><i class="fa-solid fa-people-arrows"></i> Public Consultations</a>
   </div>
 </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
