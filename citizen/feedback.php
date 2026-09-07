@@ -21,19 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$stmt = $conn->prepare("SELECT * FROM feedback WHERE user_id=? ORDER BY created_at DESC LIMIT 10");
-$stmt->bind_param('i', $uid);
-$stmt->execute();
-$mine = $stmt->get_result();
+$search=trim($_GET['q']??''); $page=max(1,(int)($_GET['p']??1)); $per_page=12; $where="user_id=$uid"; if($search){$q=$conn->real_escape_string($search);$where.=" AND (comments LIKE '%$q%' OR reference_type LIKE '%$q%')";} $total=(int)$conn->query("SELECT COUNT(*) c FROM feedback WHERE $where")->fetch_assoc()['c']; $total_pages=max(1,(int)ceil($total/$per_page)); if($page>$total_pages)$page=$total_pages; $offset=($page-1)*$per_page; $mine=$conn->query("SELECT * FROM feedback WHERE $where ORDER BY created_at DESC LIMIT $per_page OFFSET $offset");
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
 <?php if (isset($_GET['sent'])): ?><div class="alert alert-ok"><i class="fa-solid fa-circle-check"></i> Thank you! Your feedback has been recorded.</div><?php endif; ?>
-<div class="grid grid-2">
-  <div class="card">
-    <h2><i class="fa-solid fa-star"></i> Rate LGU Services</h2>
-    <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
-    <form method="post">
+<div class="modal-form-trigger-row"><p class="muted"><i class="fa-solid fa-star"></i> Share your experience with LGU services.</p><button type="button" class="btn btn-sm" data-open-inline-modal="feedbackModal"><i class="fa-solid fa-plus"></i> Add Feedback</button></div><div class="app-modal" id="feedbackModal" aria-hidden="true"><div class="app-modal-dialog" role="dialog" aria-modal="true"><div class="app-modal-head"><h2>Rate LGU Services</h2><button type="button" class="app-modal-close" data-close-inline-modal><i class="fa-solid fa-xmark"></i></button></div><div class="app-modal-body"><form method="post">
       <div class="field">
         <label>What are you rating?</label>
         <select name="reference_type">
@@ -58,10 +51,10 @@ require_once __DIR__ . '/../includes/header.php';
         <textarea name="comments" placeholder="Tell us more..."></textarea>
       </div>
       <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
-    </form>
-  </div>
-  <div class="card">
-    <h2><i class="fa-solid fa-comment-dots"></i> Your Recent Feedback</h2>
+    </form></div></div></div>
+<div class="card ajax-list-container ajax-table-container" data-ajax-endpoint="1">
+    <div class="data-toolbar"><h2 style="margin:0"><i class="fa-solid fa-comment-dots"></i> Your Recent Feedback</h2><div class="data-search"><i class="fa-solid fa-magnifying-glass"></i><input data-ajax-search type="search" value="<?= e($search) ?>" placeholder="Search feedback..."></div></div>
+    <div data-ajax-content>
     <?php if ($mine->num_rows === 0): ?>
       <div class="empty"><i class="fa-regular fa-star"></i>You haven't submitted feedback yet.</div>
     <?php else: while ($f = $mine->fetch_assoc()): ?>
@@ -73,6 +66,8 @@ require_once __DIR__ . '/../includes/header.php';
         <?php if ($f['comments']): ?><p class="small mt"><?= e($f['comments']) ?></p><?php endif; ?>
       </div>
     <?php endwhile; endif; ?>
+    </div>
+    <?php render_pagination($page,$total_pages,$total,$per_page,['q'=>$search]); ?>
   </div>
-</div>
+<script>(function(){document.querySelectorAll('[data-open-inline-modal]').forEach(function(b){b.onclick=function(){document.getElementById(b.dataset.openInlineModal).classList.add('open');};});document.querySelectorAll('[data-close-inline-modal]').forEach(function(b){b.onclick=function(){b.closest('.app-modal').classList.remove('open');};});document.querySelectorAll('.app-modal').forEach(function(m){m.onclick=function(e){if(e.target===m)m.classList.remove('open');};});})();</script>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

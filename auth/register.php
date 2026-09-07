@@ -53,17 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register - CivicLink</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/img/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/assets/img/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/img/favicon-180.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body>
+<body class="auth-page">
 <div class="auth-wrap">
   <div style="width:100%;max-width:460px">
     <a href="/landing.php" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
     <div class="auth-box" style="max-width:460px">
-    <div class="logo"><i class="fa-solid fa-landmark-dome"></i> Civic<span>Link</span></div>
+    <div class="logo"><img src="/assets/img/logo.png" alt="CivicLink" class="brand-logo"> Civic<span>Link</span></div>
     <h1>Create your account</h1>
     <p class="sub">Join CivicLink to participate in local governance</p>
     <?php if ($error): ?><div class="alert alert-bad"><i class="fa-solid fa-circle-exclamation"></i> <?= e($error) ?></div><?php endif; ?>

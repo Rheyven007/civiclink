@@ -6,16 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CivicLink - Inclusive Urban Governance & Participation Platform</title>
 <meta name="description" content="CivicLink connects citizens, sector representatives, and LGU officers in one transparent platform for proposals, service requests, complaints, and public consultations.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/img/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/assets/img/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/img/favicon-180.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body>
+<body class="lp-page">
 
 <header class="lp-header">
   <div class="lp-nav">
-    <a href="/landing.php" class="lp-logo"><i class="fa-solid fa-landmark-dome"></i> Civic<span>Link</span></a>
+    <a href="/landing.php" class="lp-logo"><img src="/assets/img/logo.png" alt="CivicLink" class="brand-logo"> Civic<span>Link</span></a>
     <nav class="lp-nav-links">
       <a href="#how-it-works">How It Works</a>
       <a href="#scope">Scope</a>
@@ -26,7 +27,17 @@
     <div class="lp-nav-cta">
       <a href="/auth/login.php" class="btn btn-outline btn-sm">Log In</a>
       <a href="/auth/register.php" class="btn btn-sm"><i class="fa-solid fa-user-plus"></i> Get Started</a>
+      <button type="button" class="lp-mobile-toggle" id="lpMenuToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
     </div>
+  </div>
+  <div class="lp-mobile-menu" id="lpMobileMenu">
+    <a href="#how-it-works">How It Works</a>
+    <a href="#scope">Scope</a>
+    <a href="#roles">Who It's For</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="/auth/login.php">Log In</a>
+    <a href="/auth/register.php">Get Started</a>
   </div>
 </header>
 
@@ -256,7 +267,7 @@
 <footer class="lp-footer">
   <div class="lp-footer-inner">
     <div>
-      <a href="/landing.php" class="lp-logo"><i class="fa-solid fa-landmark-dome"></i> Civic<span>Link</span></a>
+      <a href="/landing.php" class="lp-logo"><img src="/assets/img/logo.png" alt="CivicLink" class="brand-logo"> Civic<span>Link</span></a>
       <p class="tag">Inclusive Urban Governance and Participation System, aligned with SDG 9, 10, 11 & 16.</p>
     </div>
     <div class="lp-footer-col">
@@ -280,5 +291,18 @@
   <div class="lp-footer-bottom">&copy; <?= date('Y') ?> CivicLink &middot; Inclusive Urban Governance and Participation System</div>
 </footer>
 
+
+<script>
+(function(){
+  var btn = document.getElementById('lpMenuToggle');
+  var menu = document.getElementById('lpMobileMenu');
+  if (btn && menu) {
+    btn.addEventListener('click', function(){ menu.classList.toggle('open'); });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ menu.classList.remove('open'); });
+    });
+  }
+})();
+</script>
 </body>
 </html>

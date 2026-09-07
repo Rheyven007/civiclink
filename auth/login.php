@@ -3,6 +3,9 @@ require_once __DIR__ . '/../includes/functions.php';
 if (is_logged_in()) redirect_by_role();
 
 $error = '';
+if (($_GET['reason'] ?? '') === 'stale_session') {
+    $error = 'Your session is no longer valid (this can happen after the database was reset or re-imported). Please log in again.';
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -33,17 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Log In - CivicLink</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/img/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/assets/img/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/img/favicon-180.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body>
+<body class="auth-page">
 <div class="auth-wrap">
   <div style="width:100%;max-width:400px">
     <a href="/landing.php" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
     <div class="auth-box">
-      <div class="logo"><i class="fa-solid fa-landmark-dome"></i> Civic<span>Link</span></div>
+      <div class="logo"><img src="/assets/img/logo.png" alt="CivicLink" class="brand-logo"> Civic<span>Link</span></div>
       <h1>Welcome back</h1>
       <p class="sub">Log in to CivicLink — Inclusive Urban Governance Platform</p>
       <?php if ($error): ?><div class="alert alert-bad"><i class="fa-solid fa-circle-exclamation"></i> <?= e($error) ?></div><?php endif; ?>
@@ -54,12 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="field">
           <label>Password</label>
-          <input type="password" name="password" required>
+          <input type="password" name="password" required autocomplete="current-password">
+          <div class="hint">Use the password you set at registration.</div>
         </div>
         <button type="submit" class="btn btn-block"><i class="fa-solid fa-right-to-bracket"></i> Log In</button>
       </form>
       <div class="switch">New to CivicLink? <a href="/auth/register.php">Create an account</a></div>
-      <div class="switch small">Admin demo: admin@civicbridge.gov / password</div>
+      <div class="switch small muted" style="margin-top:10px;font-size:12px;opacity:.85">Demo admin: admin@civicbridge.gov / password</div>
     </div>
   </div>
 </div>

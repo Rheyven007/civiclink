@@ -64,7 +64,25 @@ A centralized web-based platform connecting citizens, LGUs, and community organi
 ```
 
 ## Design Notes
-- **Flat design**: solid colors, no gradients/shadows, minimal CSS footprint for fast loads and low token/bandwidth cost.
-- **Every LGU decision requires a written justification**, stored in `decision_logs` and shown to citizens on the proposal/request/complaint detail — this is the transparency and accountability mechanism (SDG 16).
+- **Modern civic UI**: green design system with soft shadows, focus rings, sticky topbar, and responsive layout.
+- **Mobile-first navigation**: slide-out sidebar on small screens; landing page has a collapsible menu.
+- **Notification panel**: recent alerts drop down from the topbar (full list still at Notifications).
+- **Transparency UX**: decision logs use a visual timeline; proposal status shows a progress stepper.
+- **Every LGU decision requires a written justification**, stored in `decision_logs` and shown to citizens — the accountability mechanism (SDG 16).
 - **Sector tagging is voluntary** and used only for equity analytics, never enforced or exposed publicly per-citizen.
 - All forms are server-validated; passwords are hashed with bcrypt; SQL uses prepared statements throughout.
+- Minimal JS (vanilla) for menu + notification panel only — no frameworks.
+
+
+## UI/UX (Nielsen Heuristics)
+This release applies the 10 usability heuristics for civic participation:
+- **Visibility of system status** — status badges, progress steppers, reference numbers (PROP-/REQ-/CMP-YYYY-#####), success screens, notification counts, “Needs your attention”
+- **Match with the real world** — plain-language labels (“Report a Concern”, “Request a Public Service”), helper text, local civic terminology
+- **User control** — Cancel + unsaved-warning, breadcrumbs, confirm before logout
+- **Consistency** — shared badges, icons, button hierarchy, form patterns
+- **Error prevention** — min lengths, disabled submit while processing, confirmation on destructive actions
+- **Recognition over recall** — clickable dashboard stats, status help text, filters
+- **Flexibility** — Quick Actions, filters, search-ready structure
+- **Aesthetic & minimalist** — reduced clutter, clear hierarchy, empty states with CTAs
+- **Error recovery** — field-level messages, non-technical errors
+- **Help & documentation** — Help Center under citizen/sector nav (`/citizen/help.php`)

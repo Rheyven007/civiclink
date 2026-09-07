@@ -7,37 +7,68 @@ $current_page = 'citizen/notifications.php';
 
 $conn->query("UPDATE notifications SET is_read=1 WHERE user_id=$uid");
 
-$stmt = $conn->prepare("SELECT * FROM notifications WHERE user_id=? ORDER BY created_at DESC LIMIT 50");
-$stmt->bind_param('i', $uid);
-$stmt->execute();
-$notifs = $stmt->get_result();
+$search=trim($_GET['q']??''); $page=max(1,(int)($_GET['p']??1)); $per_page=12; $where="user_id=$uid"; if($search){$q=$conn->real_escape_string($search);$where.=" AND message LIKE '%$q%'";} $total=(int)$conn->query("SELECT COUNT(*) c FROM notifications WHERE $where")->fetch_assoc()['c']; $total_pages=max(1,(int)ceil($total/$per_page)); if($page>$total_pages)$page=$total_pages; $offset=($page-1)*$per_page;
+$notifs=$conn->query("SELECT * FROM notifications WHERE $where ORDER BY created_at DESC LIMIT $per_page OFFSET $offset");
 
 function notif_icon($message) {
     if (stripos($message, 'vote') !== false) return ['fa-thumbs-up', 'badge-accent'];
     if (stripos($message, 'decision log') !== false || stripos($message, 'status') !== false) return ['fa-scroll', 'badge-ok'];
     return ['fa-bell', 'badge-info'];
 }
+function notif_day_label($datetime) {
+    $day = date('Y-m-d', strtotime($datetime));
+    $today = date('Y-m-d');
+    $yesterday = date('Y-m-d', strtotime('-1 day'));
+    if ($day === $today) return 'Today';
+    if ($day === $yesterday) return 'Yesterday';
+    return date('F j, Y', strtotime($datetime));
+}
 
 require_once __DIR__ . '/../includes/header.php';
+$current_day = null;
 ?>
-<div class="card">
-  <h2><i class="fa-solid fa-bell"></i> Your Notifications</h2>
-  <p class="small muted mb">You'll always be notified here when a proposal you follow gets a vote update or when a new decision is logged for transparency.</p>
-  <?php if ($notifs->num_rows === 0): ?>
+<div class="flex-between mb">
+  <div>
+    <h2 style="margin:0;font-size:18px;color:var(--primary-dark)"><i class="fa-solid fa-bell"></i> Your Notifications</h2>
+    <p class="small muted" style="margin-top:4px">You'll be notified when a proposal you follow gets a vote update or when a new decision is logged.</p>
+  </div>
+  <span class="small muted"><?= (int)$notifs->num_rows ?> recent</span>
+</div>
+
+<?php if ($notifs->num_rows === 0): ?>
+  <div class="card">
     <div class="empty"><i class="fa-regular fa-bell-slash"></i>No notifications yet.</div>
-  <?php else: while ($n = $notifs->fetch_assoc()):
+  </div>
+<?php else: ?>
+  <div class="ajax-list-container ajax-table-container" data-ajax-endpoint="1">
+  <div class="data-toolbar"><div class="data-search"><i class="fa-solid fa-magnifying-glass"></i><input data-ajax-search type="search" value="<?= e($search) ?>" placeholder="Search notifications..."></div></div>
+  <div class="notif-list-cards" data-ajax-content>
+  <?php while ($n = $notifs->fetch_assoc()):
     [$icon, $cls] = notif_icon($n['message']);
+    $day_label = notif_day_label($n['created_at']);
+    $is_new_day = ($day_label !== $current_day);
+    $current_day = $day_label;
+    $unread = empty($n['is_read']);
   ?>
-    <div class="flex-between" style="padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start;gap:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <span class="badge <?= $cls ?>" style="padding:8px;border-radius:9px"><i class="fa-solid <?= $icon ?>"></i></span>
-        <div>
-          <span><?= e($n['message']) ?></span>
-          <?php if ($n['link']): ?><br><a href="<?= e($n['link']) ?>" class="small"><i class="fa-solid fa-arrow-right"></i> View details</a><?php endif; ?>
+    <?php if ($is_new_day): ?>
+      <div class="notif-day-label"><?= e($day_label) ?></div>
+    <?php endif; ?>
+    <div class="notif-card<?= $unread ? ' unread' : '' ?>">
+      <span class="badge <?= $cls ?> notif-card-icon"><i class="fa-solid <?= $icon ?>"></i></span>
+      <div class="notif-card-body">
+        <div class="notif-card-msg"><?= e($n['message']) ?></div>
+        <div class="notif-card-meta">
+          <span title="<?= e(format_datetime($n['created_at'])) ?>"><?= time_ago($n['created_at']) ?></span>
+          <?php if ($n['link']): ?>
+            <span class="sep">&middot;</span>
+            <a href="<?= e($n['link']) ?>"><i class="fa-solid fa-arrow-right"></i> View details</a>
+          <?php endif; ?>
         </div>
       </div>
-      <span class="small muted" style="white-space:nowrap"><?= time_ago($n['created_at']) ?></span>
     </div>
-  <?php endwhile; endif; ?>
-</div>
+  <?php endwhile; ?>
+  </div>
+  <?php render_pagination($page,$total_pages,$total,$per_page,['q'=>$search]); ?>
+  </div>
+<?php endif; ?>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

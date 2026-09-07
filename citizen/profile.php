@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 require_once __DIR__ . '/../includes/header.php';
 ?>
-<div class="card" style="max-width:560px">
+<div class="card card-narrow">
   <h2><i class="fa-solid fa-user"></i> Profile Information</h2>
   <?php if ($error): ?><div class="alert alert-bad"><?= e($error) ?></div><?php endif; ?>
   <?php if ($success): ?><div class="alert alert-ok"><?= e($success) ?></div><?php endif; ?>
