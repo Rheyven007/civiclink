@@ -1,0 +1,6 @@
+# never execute scripts from the uploads folder
+php_flag engine off
+<FilesMatch "\.(php|phtml|phar|pl|py|cgi|sh)$">
+  Require all denied
+</FilesMatch>
+Options -Indexes

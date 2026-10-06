@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CivicLink</title>
+  <meta name="description" content="CivicLink — Inclusive Urban Governance and Participation System">
+  <meta name="theme-color" content="#0B6463">
+  <link rel="icon" href="assets/favicon-64.png">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="css/civiclink.css">
+  <script>
+    (function () { var d = document.documentElement.dataset;
+      d.theme = localStorage.getItem('civiclink.theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      try { var o = JSON.parse(localStorage.getItem('civiclink.a11y')) || {}; d.text = o.text || ''; d.contrast = o.contrast ? 'high' : ''; d.motion = o.motion ? 'reduce' : ''; d.links = o.links ? 'underline' : ''; d.spacing = o.spacing ? 'wide' : ''; } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <div id="app"><div class="boot" role="status" aria-label="Loading CivicLink"><div class="boot-head"></div><div class="skel-list"><div class="skel-card"><span class="skel w30"></span><span class="skel w80"></span><span class="skel w60"></span></div><div class="skel-card"><span class="skel w30"></span><span class="skel w80"></span><span class="skel w60"></span></div></div></div></div>
+  <noscript>CivicLink requires JavaScript.</noscript>
+  <script src="js/db.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/logic.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/views-public.js"></script>
+  <script src="js/views-citizen.js"></script>
+  <script src="js/views-staff.js"></script>
+  <script src="js/legal.js"></script>
+  <script src="js/tour.js"></script>
+  <script src="js/hscroll.js"></script>
+</body>
+</html>
