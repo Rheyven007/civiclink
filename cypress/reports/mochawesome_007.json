@@ -1,0 +1,262 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 9,
+    "passes": 8,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-10-06T06:13:24.700Z",
+    "end": "2026-10-06T06:14:25.098Z",
+    "duration": 60398,
+    "testsRegistered": 9,
+    "passPercent": 88.88888888888889,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8a139867-6c7b-4433-925c-dddf53436115",
+      "title": "",
+      "fullFile": "cypress\\e2e\\04-workflows.cy.js",
+      "file": "cypress\\e2e\\04-workflows.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "63084329-1b04-4151-bb71-7856bf85871f",
+          "title": "Workflows (writes to the database)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "citizen publishes a community proposal",
+              "fullTitle": "Workflows (writes to the database) citizen publishes a community proposal",
+              "timedOut": null,
+              "duration": 24706,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('citizen');\ncy.visitApp('#/feed');\ncy.openComposer('proposal');\ncy.get('#modal form[data-form=\"new-proposal\"]').within(() => {\n  cy.get('input[name=\"title\"]').type(proposalTitle);\n  cy.get('select[name=\"category\"]').select('infrastructure');\n  cy.get('textarea[name=\"description\"]').type('Install solar-powered streetlights along the barangay road.');\n  cy.get('textarea[name=\"justification\"]').type('The road is dark at night and unsafe for students.');\n  cy.get('textarea[name=\"expected_benefits\"]').type('Safer streets and lower electricity costs.');\n  cy.get('input[name=\"legal_ok\"]').check();\n  cy.root().submit();\n});\ncy.shouldToast('Proposal published');\nidFromHash('#/proposals/').then(id => {\n  proposalId = id;\n});\ncy.get('#main').should('contain.text', proposalTitle);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 10000ms: expected '<main#main.main>' to contain text 'Cypress solar streetlights muwa8srb', but the text was '\\n        \\n          ProposalProposal not foundIt may have been withdrawn by its author.Back to proposals\\n          Juan Dela Cruz \\n        Citizen · General Public Brgy. Malanday\\n        Your civic record5Proposals5Requests5Concerns\\n        \\n       Gaining community support1Solar-powered streetlights along Mabini AvenueSafety · 3 supporters2Weekend youth coding bootcamp at the public libraryEducation · 2 supporters3Cypress solar streetlights muw9llw4Infrastructure · 0 supporters4Cypress solar streetlights muw9poepInfrastructure · 0 supporters\\n       Open consultations2027 Barangay Development Plan prioritiesUntil Oct 14, 2026 · 3 responsesProposed one-way traffic scheme on J.P. RizalUntil Oct 9, 2026 · 2 responses\\n       Active discussionsCovered waiting sheds for jeepney stops on J.P. RizalTransport · 1 participant · 4hWeekend youth coding bootcamp at the public libraryEducation · 2 participants · 13hSolar-powered streetlights along Mabini AvenueSafety · 2 participants · 6d\\n       Government accountability22%Requests resolved4.0/5Citizen rating16Justified decisions\\n       Community guidelinesRespect privacy — RA 10173No libel or harassment — RA 10175 · RA 11313Emergencies: call 911Read the Terms of Use\\n        \\n        CivicLinkYour community. Your voice. Your local government. Connected.TermsPrivacy (RA 10173)LawsHelpCivicLink © 2026\\n      '",
+                "estack": "AssertionError: Timed out retrying after 10000ms: expected '<main#main.main>' to contain text 'Cypress solar streetlights muwa8srb', but the text was '\\n        \\n          ProposalProposal not foundIt may have been withdrawn by its author.Back to proposals\\n          Juan Dela Cruz \\n        Citizen · General Public Brgy. Malanday\\n        Your civic record5Proposals5Requests5Concerns\\n        \\n       Gaining community support1Solar-powered streetlights along Mabini AvenueSafety · 3 supporters2Weekend youth coding bootcamp at the public libraryEducation · 2 supporters3Cypress solar streetlights muw9llw4Infrastructure · 0 supporters4Cypress solar streetlights muw9poepInfrastructure · 0 supporters\\n       Open consultations2027 Barangay Development Plan prioritiesUntil Oct 14, 2026 · 3 responsesProposed one-way traffic scheme on J.P. RizalUntil Oct 9, 2026 · 2 responses\\n       Active discussionsCovered waiting sheds for jeepney stops on J.P. RizalTransport · 1 participant · 4hWeekend youth coding bootcamp at the public libraryEducation · 2 participants · 13hSolar-powered streetlights along Mabini AvenueSafety · 2 participants · 6d\\n       Government accountability22%Requests resolved4.0/5Citizen rating16Justified decisions\\n       Community guidelinesRespect privacy — RA 10173No libel or harassment — RA 10175 · RA 11313Emergencies: call 911Read the Terms of Use\\n        \\n        CivicLinkYour community. Your voice. Your local government. Connected.TermsPrivacy (RA 10173)LawsHelpCivicLink © 2026\\n      '\n    at Context.eval (webpack:///./cypress/e2e/04-workflows.cy.js:33:20)",
+                "diff": "- '\\n        \\n          ProposalProposal not foundIt may have been withdrawn by its author.Back to proposals\\n          Juan Dela Cruz \\n        Citizen · General Public Brgy. Malanday\\n        Your civic record5Proposals5Requests5Concerns\\n        \\n       Gaining community support1Solar-powered streetlights along Mabini AvenueSafety · 3 supporters2Weekend youth coding bootcamp at the public libraryEducation · 2 supporters3Cypress solar streetlights muw9llw4Infrastructure · 0 supporters4Cypress solar streetlights muw9poepInfrastructure · 0 supporters\\n       Open consultations2027 Barangay Development Plan prioritiesUntil Oct 14, 2026 · 3 responsesProposed one-way traffic scheme on J.P. RizalUntil Oct 9, 2026 · 2 responses\\n       Active discussionsCovered waiting sheds for jeepney stops on J.P. RizalTransport · 1 participant · 4hWeekend youth coding bootcamp at the public libraryEducation · 2 participants · 13hSolar-powered streetlights along Mabini AvenueSafety · 2 participants · 6d\\n       Government accountability22%Requests resolved4.0/5Citizen rating16Justified decisions\\n       Community guidelinesRespect privacy — RA 10173No libel or harassment — RA 10175 · RA 11313Emergencies: call 911Read the Terms of Use\\n        \\n        CivicLinkYour community. Your voice. Your local government. Connected.TermsPrivacy (RA 10173)LawsHelpCivicLink © 2026\\n      '\n+ 'Cypress solar streetlights muwa8srb'\n"
+              },
+              "uuid": "9c9d4a68-bcdb-416f-a81f-914447fd2e78",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "citizen submits a service request that is routed automatically",
+              "fullTitle": "Workflows (writes to the database) citizen submits a service request that is routed automatically",
+              "timedOut": null,
+              "duration": 7639,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('citizen');\ncy.visitApp('#/feed');\ncy.openComposer('request');\ncy.get('#modal form[data-form=\"new-request\"]').within(() => {\n  cy.get('select[name=\"service_type\"]').select('Streetlight repair');\n  cy.get('select[name=\"priority\"]').select('high');\n  cy.get('input[name=\"location\"]').type(requestLocation);\n  cy.get('textarea[name=\"description\"]').type('Streetlight has been out for a week near the chapel.');\n  cy.get('input[name=\"legal_ok\"]').check();\n  cy.root().submit();\n});\ncy.shouldToast('submitted');\nidFromHash('#/requests/').then(id => {\n  requestId = id;\n  cy.get('#main').should('contain.text', `REQ-${String(id).padStart(4, '0')}`);\n});\ncy.visitApp('#/requests');\ncy.get('#main').should('contain.text', 'Streetlight repair');",
+              "err": {},
+              "uuid": "36718abc-231c-4e41-88be-c99a663fee46",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "citizen files a complaint",
+              "fullTitle": "Workflows (writes to the database) citizen files a complaint",
+              "timedOut": null,
+              "duration": 6676,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('citizen');\ncy.visitApp('#/feed');\ncy.openComposer('complaint');\ncy.get('#modal form[data-form=\"new-complaint\"]').within(() => {\n  cy.get('input[name=\"subject\"]').type(complaintSubject);\n  cy.get('select[name=\"category\"]').select('facility');\n  cy.get('textarea[name=\"details\"]').type('The barangay hall ramp is blocked by parked motorcycles every morning.');\n  cy.get('input[name=\"legal_ok\"]').check();\n  cy.root().submit();\n});\ncy.shouldToast('filed');\nidFromHash('#/complaints/');\ncy.get('#main').should('contain.text', complaintSubject);",
+              "err": {},
+              "uuid": "c369f4f8-e3aa-4765-894e-2103120ea621",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "sector representative endorses the new proposal",
+              "fullTitle": "Workflows (writes to the database) sector representative endorses the new proposal",
+              "timedOut": null,
+              "duration": 2605,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('sector');\ncy.visitApp('#/sector/endorse');\ncy.get(`article[data-pid=\"${proposalId}\"]`).find('[data-act=\"endorse\"]').click();\ncy.get('#modal form[data-form=\"endorse\"]').within(() => {\n  cy.get('textarea[name=\"statement\"]').type('Our members walk this road every night after school.');\n  cy.get('input[name=\"legal_ok\"]').check();\n  cy.root().submit();\n});\ncy.shouldToast('Endorsed on behalf of your sector');\ncy.contains('.tabs button', 'Endorsed by me').click();\ncy.get(`article[data-pid=\"${proposalId}\"]`).should('exist');",
+              "err": {},
+              "uuid": "8b228807-2b12-46cb-869d-a147dcdb3098",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "LGU officer finds the request and records a decision",
+              "fullTitle": "Workflows (writes to the database) LGU officer finds the request and records a decision",
+              "timedOut": null,
+              "duration": 6753,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('lgu');\ncy.visitApp('#/lgu/cases/service_request');\ncy.get('table.tbl').contains('tr', `REQ-${String(requestId).padStart(4, '0')}`).click();\ncy.location('hash').should('eq', `#/lgu/cases/service_request/${requestId}`);\ncy.get('form[data-form=\"decide\"]').within(() => {\n  cy.get('input[name=\"to\"][value=\"in_progress\"]').check();\n  cy.get('textarea[name=\"justification\"]').type(justification);\n  cy.root().submit();\n});\ncy.shouldToast('Decision recorded');\ncy.get('.case-hero .badge').first().should('contain.text', 'In Progress');\ncy.get('#main').should('contain.text', justification);",
+              "err": {},
+              "uuid": "0846d4c2-7efe-4bd4-9ed1-2c134011e8b0",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "LGU officer rejects a decision without a long enough justification",
+              "fullTitle": "Workflows (writes to the database) LGU officer rejects a decision without a long enough justification",
+              "timedOut": null,
+              "duration": 3030,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('lgu');\ncy.visitApp(`#/lgu/cases/service_request/${requestId}`);\ncy.get('form[data-form=\"decide\"] textarea[name=\"justification\"]').should('have.attr', 'minlength', '15').and('have.attr', 'required');",
+              "err": {},
+              "uuid": "8ffba8c0-2583-44c4-8224-128b2bd1f530",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "LGU officer moves the proposal to review",
+              "fullTitle": "Workflows (writes to the database) LGU officer moves the proposal to review",
+              "timedOut": null,
+              "duration": 4946,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('lgu');\ncy.visitApp(`#/lgu/cases/proposal/${proposalId}`);\ncy.get('#main').should('contain.text', proposalTitle).and('contain.text', 'Sector endorsements');\ncy.get('form[data-form=\"decide\"]').within(() => {\n  cy.get('input[name=\"to\"][value=\"under_review\"]').check();\n  cy.get('textarea[name=\"justification\"]').type('Forwarded to the Engineering Office for costing.');\n  cy.root().submit();\n});\ncy.shouldToast('Decision recorded');",
+              "err": {},
+              "uuid": "4f2131a5-4592-4102-98d5-d64a172087d1",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "citizen sees the decision and justification on their request",
+              "fullTitle": "Workflows (writes to the database) citizen sees the decision and justification on their request",
+              "timedOut": null,
+              "duration": 1095,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.loginAs('citizen');\ncy.visitApp(`#/requests/${requestId}`);\ncy.get('#main').should('contain.text', justification);\ncy.get('#main').invoke('text').should('match', /in progress/i);",
+              "err": {},
+              "uuid": "d59f691d-704d-4f0c-90d3-fc0dc7e7846a",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "a new resident can register and lands on the Community Hub",
+              "fullTitle": "Workflows (writes to the database) a new resident can register and lands on the Community Hub",
+              "timedOut": null,
+              "duration": 2209,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/#/register');\ncy.get('form[data-form=\"register\"]').within(() => {\n  cy.get('input[name=\"full_name\"]').type(`Cypress Resident ${run}`);\n  cy.get('input[name=\"email\"]').type(`cypress.${run}@example.com`);\n  cy.get('input[name=\"contact_number\"]').type('09171234567');\n  cy.get('input[name=\"barangay\"]').type('Poblacion');\n  cy.get('input[name=\"password\"]').type('password123');\n  cy.get('input[name=\"confirm\"]').type('password123');\n  cy.get('input[name=\"agree\"]').check();\n  cy.root().submit();\n});\ncy.location('hash', {\n  timeout: 15000\n}).should('eq', '#/feed');\ncy.title().should('eq', 'Community Hub · CivicLink');\ncy.get('.terms-wrap').should('not.exist'); // terms were accepted during registration",
+              "err": {},
+              "uuid": "d08dff52-53d3-4cb9-b412-6bcfaf307340",
+              "parentUUID": "63084329-1b04-4151-bb71-7856bf85871f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "36718abc-231c-4e41-88be-c99a663fee46",
+            "c369f4f8-e3aa-4765-894e-2103120ea621",
+            "8b228807-2b12-46cb-869d-a147dcdb3098",
+            "0846d4c2-7efe-4bd4-9ed1-2c134011e8b0",
+            "8ffba8c0-2583-44c4-8224-128b2bd1f530",
+            "4f2131a5-4592-4102-98d5-d64a172087d1",
+            "d59f691d-704d-4f0c-90d3-fc0dc7e7846a",
+            "d08dff52-53d3-4cb9-b412-6bcfaf307340"
+          ],
+          "failures": [
+            "9c9d4a68-bcdb-416f-a81f-914447fd2e78"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 59659,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

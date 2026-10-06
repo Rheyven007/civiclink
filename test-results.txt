@@ -1,0 +1,215 @@
+
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        16.1.1                                                                         │
+  │ Browser:        Electron 146 (headless) (deprecated)                                           │
+  │ Node Version:   v24.19.0 (C:\Program Files\nodejs\node.exe)                                    │
+  │ Specs:          4 found (01-auth.cy.js, 02-citizen.cy.js, 03-staff.cy.js, 04-workflows.cy.js)  │
+  │ Searched:       cypress/e2e/**/*.cy.js                                                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Warning: The Electron browser is deprecated as a test browser and will be removed in a future version of Cypress.
+
+Switch to Chrome or another installed browser to avoid a breaking change when you upgrade.
+
+Read more about supported browsers: https://on.cypress.io/launching-browsers
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  01-auth.cy.js                                                                   (1 of 4)
+
+
+  Authentication
+    √ sends signed-out visitors to the login page
+    √ shows the sign-in form and one Quick sign-in account per role
+    √ rejects a wrong password and stays on the login page
+    √ signs in with a Quick sign-in button
+    √ signs each role in to its own home page (13665ms)
+    √ signs out from the account menu (7213ms)
+
+  Registration validation
+    √ blocks submission when required fields are empty
+    √ requires an 8+ character password and the privacy consent
+    √ shows an error when the passwords do not match
+
+
+  9 passing (37s)
+
+[mochawesome] Report JSON saved to C:\xampp\htdocs\civiclink\cypress\reports\mochawesome_008.json
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        9                                                                                │
+  │ Passing:      9                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     37 seconds                                                                       │
+  │ Spec Ran:     01-auth.cy.js                                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  02-citizen.cy.js                                                                (2 of 4)
+
+
+  Citizen portal
+    √ loads the Community Hub with the three civic actions (8599ms)
+    √ opens Community Proposals (#/proposals)
+    √ opens Public Consultations (#/consultations)
+    √ opens Service Requests (#/requests)
+    √ opens Concerns & Complaints (#/complaints)
+    √ opens Feedback & Ratings (#/feedback)
+    √ opens Notifications (#/notifications)
+    √ opens My Civic Profile (#/profile)
+    √ opens Laws & Terms (#/legal)
+    √ opens the composer and closes it with Cancel
+    √ validates the proposal form before saving
+    √ routes each service type to the right department
+    √ validates the service request description
+    √ validates the complaint details
+    √ requires the legal confirmation checkbox on submissions (6279ms)
+    √ applies accessibility settings and resets them (5347ms)
+
+
+  16 passing (1m)
+
+[mochawesome] Report JSON saved to C:\xampp\htdocs\civiclink\cypress\reports\mochawesome_009.json
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        16                                                                               │
+  │ Passing:      16                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 3 seconds                                                              │
+  │ Spec Ran:     02-citizen.cy.js                                                                 │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  03-staff.cy.js                                                                  (3 of 4)
+
+
+  Sector representative portal
+    √ opens Sector Hub (#/sector)
+    √ opens Endorsements (#/sector/endorse)
+    √ switches between endorsement tabs
+
+  LGU officer portal
+    √ opens Overview (#/lgu) (5698ms)
+    √ opens Case Management (#/lgu/cases) (5099ms)
+    √ opens SLA & Performance (#/lgu/sla)
+    √ opens Reports & Analytics (#/admin/reports)
+    √ has case tabs for requests, complaints and proposals
+    √ cannot create reports from the citizen composer
+
+  Administrator portal
+    √ opens Overview (#/admin)
+    √ opens User Management (#/admin/users)
+    √ opens Sector Management (#/admin/sectors)
+    √ opens Consultation Moderation (#/admin/consultations)
+    √ opens Reports & Analytics (#/admin/reports)
+    √ opens Audit Logs (#/admin/audit) (5277ms)
+    √ opens Settings (#/admin/settings)
+    √ opens Case Management (#/lgu/cases)
+
+  Role-based access
+    √ blocks citizen from #/lgu/cases
+    √ blocks citizen from #/admin/users
+    √ blocks citizen from #/sector/endorse
+    √ blocks sector from #/lgu
+    √ blocks lgu from #/admin/users
+    √ blocks lgu from #/requests
+
+
+  23 passing (1m)
+
+[mochawesome] Report JSON saved to C:\xampp\htdocs\civiclink\cypress\reports\mochawesome_010.json
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        23                                                                               │
+  │ Passing:      23                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 10 seconds                                                             │
+  │ Spec Ran:     03-staff.cy.js                                                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  04-workflows.cy.js                                                              (4 of 4)
+
+
+  Workflows (writes to the database)
+    √ citizen publishes a community proposal (11211ms)
+    √ citizen submits a service request that is routed automatically
+    √ citizen files a complaint
+    √ sector representative endorses the new proposal
+    √ LGU officer finds the request and records a decision (7099ms)
+    √ LGU officer rejects a decision without a long enough justification (6504ms)
+    √ LGU officer moves the proposal to review (5898ms)
+    √ citizen sees the decision and justification on their request
+    √ a new resident can register and lands on the Community Hub (5701ms)
+
+
+  9 passing (54s)
+
+[mochawesome] Report JSON saved to C:\xampp\htdocs\civiclink\cypress\reports\mochawesome_011.json
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        9                                                                                │
+  │ Passing:      9                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     53 seconds                                                                       │
+  │ Spec Ran:     04-workflows.cy.js                                                               │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  01-auth.cy.js                            00:37        9        9        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  02-citizen.cy.js                         01:03       16       16        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  03-staff.cy.js                           01:10       23       23        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  04-workflows.cy.js                       00:53        9        9        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        03:45       57       57        -        -        -  
+

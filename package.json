@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "cypress": "^16.1.1",
+    "mochawesome": "^8.1.1",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2"
+  },
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "cypress run",
+    "test:e2e:readonly": "cypress run --expose readOnly=true",
+    "mock:api": "node cypress/mock-server.js . 3000"
+  }
+}
